@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="Styles1.css">
+  <style>
+    .Smell {
+      position: absolute; /* Ensure positioning so z-index works */
+      top: 50%; /* Adjust as needed */
+      left: 50%; /* Adjust as needed */
+      transform: translate(-50%, -80%); /* Centering */
+      z-index: 9999; /* High z-index to stay on top */
+    }
+    .Smellsmoke {
+      position: absolute; /* Ensure positioning so z-index works */
+      top: 50%; /* Adjust as needed */
+      left: 50%; /* Adjust as needed */
+      transform: translate(-50%, 10%); /* Centering */
+      z-index: 9999; /* High z-index to stay on top */
+    }
+      
+  </style>
+</head>
+<body class="page4">
+  <img class="Smell" src="Smell.png" alt="Smell" onclick="changeImage()">
+
+  <a href="page5.html"> 
+  <img class="Smellsmoke" src="Smellsmoke.gif" alt="Smellsmoke">
+</a>
+
+  <script>
+    let zIndexCounter = 1; // Counter for stacking z-index
+
+    document.addEventListener('mousemove', (e) => {
+        const cursor = document.createElement('div'); // Create new cursor element
+        cursor.style.position = 'absolute';
+        cursor.style.top = `${e.pageY - 125}px`; // Adjust so the cursor is centered
+        cursor.style.left = `${e.pageX - 125}px`;
+        cursor.style.backgroundColor = 'rgba(255, 226, 163, 1)'; // Semi-transparent yellow
+        cursor.style.width = '100px';
+        cursor.style.height = '100px';
+        cursor.style.borderRadius = '50%'; // Ensure it's circular
+        cursor.style.pointerEvents = 'none'; // Allow mouse events to pass through
+        cursor.style.filter = 'blur(25px)'; // Blur for smoke effect
+        cursor.style.zIndex = zIndexCounter++; // Increase z-index for stacking effect
+
+        // Add soft edge shadow to make it look smoother
+        cursor.style.boxShadow = '0 0 0px rgba(255, 226, 163, 1)';
+
+        document.body.appendChild(cursor); // Append to the body
+
+        // Remove cursor after 0.7 seconds to avoid too many elements stacking forever
+        setTimeout(() => {
+            cursor.remove();
+        }, 700); // Removes cursor element after 700ms
+    });
+  </script>
+</body>
+</html>
+
+
